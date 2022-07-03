@@ -48,15 +48,16 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr htmlcov/
 	rm -fr .pytest_cache
 
-lint/flake8: ## check style with flake8
+
+lint: ## lint using flake8 + pylint
 	flake8 {{ cookiecutter.project_slug }} tests
+	pylint  {{ cookiecutter.project_slug }} tests
 
-{%- if cookiecutter.use_black == 'y' %}
-lint/black: ## check style with black
-	black --check {{ cookiecutter.project_slug }} tests
-{%- endif %}
+format:
+	isort {{ cookiecutter.project_slug }} tests
+	black -l {{ cookiecutter.project_slug }} tests
+	docformatter --in-place --recursive {{ cookiecutter.project_slug }} tests
 
-lint: lint/flake8{%- if cookiecutter.use_black == 'y' %} lint/black{%- endif %} ## check style
 
 test: ## run tests quickly with the default Python
 {%- if cookiecutter.use_pytest == 'y' %}
@@ -88,9 +89,6 @@ docs: ## generate Sphinx HTML documentation, including API docs
 
 servedocs: docs ## compile the docs watching for changes
 	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
-
-release: dist ## package and upload a release
-	twine upload dist/*
 
 dist: clean ## builds source and wheel package
 	python setup.py sdist
