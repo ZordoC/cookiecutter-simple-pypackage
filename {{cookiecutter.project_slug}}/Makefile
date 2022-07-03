@@ -43,7 +43,6 @@ clean-pyc: ## remove Python file artifacts
 	find . -name '__pycache__' -exec rm -fr {} +
 
 clean-test: ## remove test and coverage artifacts
-	rm -fr .tox/
 	rm -f .coverage
 	rm -fr htmlcov/
 	rm -fr .pytest_cache
@@ -65,9 +64,6 @@ test-integration:
 
 test-e2e:
 	pytest test/e2e
-
-test-all: ## run tests on every Python version with tox
-	tox
 
 coverage: ## check code coverage quickly with the default Python
 
