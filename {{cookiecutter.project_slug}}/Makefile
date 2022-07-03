@@ -48,16 +48,14 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr htmlcov/
 	rm -fr .pytest_cache
 
-
 lint: ## lint using flake8 + pylint
 	flake8 {{ cookiecutter.project_slug }} tests
 	pylint  {{ cookiecutter.project_slug }} tests
 
 format:
 	isort {{ cookiecutter.project_slug }} tests
-	black -l {{ cookiecutter.project_slug }} tests
+	black {{ cookiecutter.project_slug }} tests
 	docformatter --in-place --recursive {{ cookiecutter.project_slug }} tests
-
 
 test: ## run tests quickly with the default Python
 {%- if cookiecutter.use_pytest == 'y' %}
