@@ -44,7 +44,6 @@ setup(
             '{{ cookiecutter.project_slug }}={{ cookiecutter.project_slug }}.cli:main',
         ],
     },
-    install_requires=requirements,
 {%- if cookiecutter.open_source_license in license_classifiers %}
     license="{{ cookiecutter.open_source_license }}",
 {%- endif %}
