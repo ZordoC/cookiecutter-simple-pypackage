@@ -66,10 +66,6 @@ test-integration:
 test-e2e:
 	pytest test/e2e
 
-test-basic:
-	test-unit
-	test-integration
-
 test-all: ## run tests on every Python version with tox
 	tox
 
