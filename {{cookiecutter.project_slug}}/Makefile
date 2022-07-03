@@ -57,12 +57,18 @@ format:
 	black {{ cookiecutter.project_slug }} tests
 	docformatter --in-place --recursive {{ cookiecutter.project_slug }} tests
 
-test: ## run tests quickly with the default Python
-{%- if cookiecutter.use_pytest == 'y' %}
-	pytest
-{%- else %}
-	python setup.py test
-{%- endif %}
+test-unit:
+	pytest tests/unit
+
+test-integration:
+	pytest test/integration
+
+test-e2e:
+	pytest test/e2e
+
+test-basic:
+	test-unit
+	test-integration
 
 test-all: ## run tests on every Python version with tox
 	tox
