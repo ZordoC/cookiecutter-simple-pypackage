@@ -27,6 +27,7 @@ BROWSER := python -c "$$BROWSER_PYSCRIPT"
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
+
 clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
 
 clean-build: ## remove build artifacts
@@ -47,14 +48,43 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr htmlcov/
 	rm -fr .pytest_cache
 
-lint: ## lint using flake8 + pylint
-	flake8 {{ cookiecutter.project_slug }} tests
-	pylint  {{ cookiecutter.project_slug }} tests
+coverage: ## check code coverage quickly with the default Python
+
+	coverage run --source {{ cookiecutter.project_slug }} -m pytest
+	coverage report -m
+	coverage html
+	$(BROWSER) htmlcov/index.html
+
+dist: clean ## builds source and wheel package
+	python setup.py sdist
+	python setup.py bdist_wheel
+	ls -l dist
+
+docs: ## generate Sphinx HTML documentation, including API docs
+	rm -f docs/{{ cookiecutter.project_slug }}.rst
+	rm -f docs/modules.rst
+	sphinx-apidoc -o docs/ {{ cookiecutter.project_slug }}
+	$(MAKE) -C docs clean
+	$(MAKE) -C docs html
+	$(BROWSER) docs/_build/html/index.html
 
 format:
 	isort {{ cookiecutter.project_slug }} tests
 	black {{ cookiecutter.project_slug }} tests
 	docformatter --in-place --recursive {{ cookiecutter.project_slug }} tests
+
+install: clean ## install the package to the active Python's site-packages
+	python setup.py install
+
+jupyter:
+	jupyter notebook
+
+lint: ## lint using flake8 + pylint
+	flake8 {{ cookiecutter.project_slug }} tests
+	pylint  {{ cookiecutter.project_slug }} tests
+
+dev-venv:
+	pip install -r requirements-dev.txt
 
 test-unit:
 	pytest tests/unit
@@ -65,28 +95,6 @@ test-integration:
 test-e2e:
 	pytest test/e2e
 
-coverage: ## check code coverage quickly with the default Python
-
-	coverage run --source {{ cookiecutter.project_slug }} -m pytest
-	coverage report -m
-	coverage html
-	$(BROWSER) htmlcov/index.html
-
-docs: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/{{ cookiecutter.project_slug }}.rst
-	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ {{ cookiecutter.project_slug }}
-	$(MAKE) -C docs clean
-	$(MAKE) -C docs html
-	$(BROWSER) docs/_build/html/index.html
-
 servedocs: docs ## compile the docs watching for changes
 	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
 
-dist: clean ## builds source and wheel package
-	python setup.py sdist
-	python setup.py bdist_wheel
-	ls -l dist
-
-install: clean ## install the package to the active Python's site-packages
-	python setup.py install
