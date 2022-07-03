@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 """Unit tests for `{{ cookiecutter.project_slug }}` package."""
-import pytest
-
-from {{ cookiecutter.project_slug }} import {{ cookiecutter.project_slug }}
+from {{ cookiecutter.project_slug }}.{{ cookiecutter.project_slug }} import lowecase_input
 
 
 def test_lowercase_input():
@@ -12,5 +10,5 @@ def test_lowercase_input():
         elaborate code that may require some sort of setup
     """
     sentence = "Hi My Name is Jose"
-    result = {{ cookiecutter.project_slug }}.lowercase_input(sentence)
+    result = lowecase_input(sentence)
     assert result == "hi my name is jose"

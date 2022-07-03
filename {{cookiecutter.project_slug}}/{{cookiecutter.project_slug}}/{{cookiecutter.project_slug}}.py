@@ -9,9 +9,9 @@ def lowercase_input(sentence: str) -> str:
 
     Returns:
         Lowercased input.
-        
+
     Demo doctest:
-        
+
     >>> lowercase_input('My name is Jose')
     'my name is jose'
     """
