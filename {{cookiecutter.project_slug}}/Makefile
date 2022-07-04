@@ -83,7 +83,7 @@ lint: ## lint using flake8 + pylint
 	flake8 {{ cookiecutter.project_slug }} tests
 	pylint  {{ cookiecutter.project_slug }} tests
 
-dev-venv:
+venv-dev:
 	pip install -r requirements-dev.txt
 
 test-unit:
