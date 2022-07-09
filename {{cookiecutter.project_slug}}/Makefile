@@ -84,7 +84,7 @@ lint: ## lint using flake8 + pylint
 	pylint  {{ cookiecutter.project_slug }} tests
 
 venv-dev:
-	pip install -r requirements-dev.txt
+	pip install -r requirements_dev.txt
 
 tests-unit:
 	pytest tests/unit

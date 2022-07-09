@@ -45,12 +45,14 @@ Generate a Python package project::
 Then:
 
     cd <package-name>;
+    python -m venv .venv
+    . .venv/bin/activate
+    make venv-dev
     git init
-    git add .
-    pip install -r requirements-dev.txt
     pre-commit install
+    git add .
     git commit -m "First commit"
-    
+
 
 
 .. _`pip docs for requirements files`: https://pip.pypa.io/en/stable/user_guide/#requirements-files
