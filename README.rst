@@ -91,7 +91,6 @@ Pre-built documentation setup!
     make docs
 
 
-
 Distribute your package
 -----------------------
 You can distribute via wheel file (https://www.reddit.com/r/learnpython/comments/78xtap/eli5_python_wheels/).
