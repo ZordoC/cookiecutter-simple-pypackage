@@ -26,6 +26,7 @@ Features
 * Testing setup with ``pytest``.
 * Formatting (black, docformatter, isort).
 * Linting (flake8, pylint).
+* Pre-commit configured.
 * Sphinx_ docs: Documentation ready for generation with, for example, `Read the Docs`_
 
 .. _Cookiecutter: https://github.com/cookiecutter/cookiecutter
@@ -42,23 +43,64 @@ Generate a Python package project::
 
     cookiecutter https://github.com/ZordoC/cookiecutter-simple-pypackage/
 
-Then:
+Dev Container (VScode)
+----------------------
+There's a development Dockerfile stored in `docker/`, highly recommend having distinct Dockerfiles for different enviroments.
+You need to have remote-container VScode extension installed, once you have that:
+
+1. `cd <package>`
+2. Open Pallet `CMD + SHIFT + P` (MacOS).
+3. Select `Remote-Containers: Reopen in container`.
+4. Develop your features.
+
+
+Local development
+-----------------
 
     cd <package-name>;
+
     python -m venv .venv
-    . .venv/bin/activate
+
+    ..venv/bin/activate
+
     make venv-dev
+
     git init
+
     pre-commit install
+
     git add .
+
     git commit -m "First commit"
 
 
-Bonus Info:
+Run tests, linters & formatters.
+-----------------------
 
-1. Create a python wheel to distribute your package.
+    make tests
+
+    make format
+
+    make lint
+
+
+Documentation
+-----------------------
+Pre-built documentation setup!
+
+    make docs
+
+
+
+Distribute your package
+-----------------------
+You can distribute via wheel file (https://www.reddit.com/r/learnpython/comments/78xtap/eli5_python_wheels/).
+
     make dist
-2. Develop inside docker -> VScode.
+
+
+
+
 
 
 
