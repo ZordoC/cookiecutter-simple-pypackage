@@ -86,15 +86,18 @@ lint: ## lint using flake8 + pylint
 venv-dev:
 	pip install -r requirements-dev.txt
 
-test-unit:
+tests-unit:
 	pytest tests/unit
 
-test-integration:
+tests-integration:
 	pytest test/integration
 
-test-e2e:
+tests-e2e:
 	pytest test/e2e
+
+tests-basic: tests-unit test-integration
+	
+tests-all: tests-unit test-integration test-e2e
 
 servedocs: docs ## compile the docs watching for changes
 	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
-
