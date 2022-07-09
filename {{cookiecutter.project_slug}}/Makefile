@@ -1,5 +1,5 @@
 .PHONY: clean clean-build clean-pyc clean-test coverage dist docs help install lint test-unit test-integration test-e2e test-basic format
-        
+
 .DEFAULT_GOAL := help
 
 define BROWSER_PYSCRIPT
@@ -96,7 +96,7 @@ tests-e2e:
 	pytest test/e2e
 
 tests-basic: tests-unit test-integration
-	
+
 tests-all: tests-unit test-integration test-e2e
 
 servedocs: docs ## compile the docs watching for changes

@@ -11,13 +11,13 @@ repos:
       name: Running Linters
       language: system
       entry: make lint
-    
+
     - id: format
       name: Running code formatters
       language: system
       entry: make format
-      
-    
+
+
     - id: unit-tests
       name: Running unit tests.
       language: system
