@@ -54,6 +54,13 @@ Then:
     git commit -m "First commit"
 
 
+Bonus Info:
+
+1. Create a python wheel to distribute your package.
+    make dist
+2. Develop inside docker -> VScode.
+
+
 
 .. _`pip docs for requirements files`: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 .. _Register: https://packaging.python.org/tutorials/packaging-projects/#uploading-the-distribution-archives
