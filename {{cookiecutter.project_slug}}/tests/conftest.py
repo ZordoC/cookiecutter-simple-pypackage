@@ -10,4 +10,4 @@ def response():
 
     See more at: http://doc.pytest.org/en/latest/fixture.html
     """
-    return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
+    return requests.get("https://github.com/audreyr/cookiecutter-pypackage")
