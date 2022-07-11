@@ -43,16 +43,6 @@ Generate a Python package project::
 
     cookiecutter https://github.com/ZordoC/cookiecutter-simple-pypackage/
 
-Dev Container (VScode)
-----------------------
-There's a development Dockerfile stored in `docker/`, highly recommend having distinct Dockerfiles for different enviroments.
-You need to have remote-container VScode extension installed, once you have that:
-
-1. `cd <package>`
-2. Open Pallet `CMD + SHIFT + P` (MacOS).
-3. Select `Remote-Containers: Reopen in container`.
-4. Develop your features.
-
 
 Local development
 -----------------
@@ -61,7 +51,7 @@ Local development
 
     python -m venv .venv
 
-    ..venv/bin/activate
+    . .venv/bin/activate
 
     make venv-dev
 
@@ -72,6 +62,17 @@ Local development
     git add .
 
     git commit -m "First commit"
+
+
+Dev Container (VScode)
+----------------------
+There's a development Dockerfile stored in `docker/`, highly recommend having distinct Dockerfiles for different enviroments.
+You need to have remote-container VScode extension installed, once you have that:
+
+1. Open folder with VScode.
+2. Open Pallet `CMD + SHIFT + P` (MacOS).
+3. Select `Remote-Containers: Reopen in container`.
+4. git init; pre-commit install; git add . ; git commit -m "Stuff"
 
 
 Run tests, linters & formatters.
