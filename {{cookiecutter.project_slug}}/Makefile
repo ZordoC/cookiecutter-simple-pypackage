@@ -80,11 +80,14 @@ jupyter:
 	jupyter notebook
 
 lint: ## lint using flake8 + pylint
-	flake8 {{ cookiecutter.project_slug }} tests
-	pylint  {{ cookiecutter.project_slug }} tests
+	flake8 {{ cookiecutter.project_slug }} --max-complexity 10
+	pylint  {{ cookiecutter.project_slug }}
 
 venv-dev:
 	pip install -r requirements_dev.txt
+
+servedocs: docs ## compile the docs watching for changes
+	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
 
 tests-unit:
 	pytest tests/unit
@@ -98,6 +101,3 @@ tests-e2e:
 tests-basic: tests-unit test-integration
 
 tests-all: tests-unit test-integration test-e2e
-
-servedocs: docs ## compile the docs watching for changes
-	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
